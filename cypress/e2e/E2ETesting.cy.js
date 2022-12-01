@@ -35,9 +35,13 @@ describe('End to end testing of Light-Dark Mode site', () => {
         cy.get('#input-container > h1').should('have.text', 'Create Your Custom Countdown ! ')
         const tomorrow = addDays(today, 1)
         cy.get('#date-picker').type(justDateString(tomorrow)) // add tomorrow
-        cy.get('#countdownForm > button').click()
+        cy.get('#countdownForm > button').click().should(() => {
+            expect(localStorage.getItem('countdown')).to.exist  //assert that local storage was made
+        })
         cy.get('#countdown-title').should('have.text', 'Bala')
-        cy.get('#countdown-button').click() //back to home page
+        cy.get('#countdown-button').click().should(() => {      //back to home page
+            expect(localStorage.getItem('countdown')).to.not.exist  //assert that localstorage was removed
+        })
         cy.get('#input-container > h1').should('have.text', 'Create Your Custom Countdown ! ')
     })
 
