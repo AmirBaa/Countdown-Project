@@ -5,17 +5,14 @@ function addDays(date, days) {
     result.setDate(result.getDate() + days);
     return result;
 }
-
 function justDateString(date) {
     return date.toISOString().split('T')[0]
 }
-
-describe('End to end testing of Light-Dark Mode site', () => {
+describe('Countdown Project', () => {
     beforeEach(() => {
         cy.visit('http://127.0.0.1:5500/')
     })
-
-    it('Testing Create your custom countdown', () => {
+    it('creates your custom countdown', () => {
         cy.get('label[for="title"]').should('have.text', 'Title')
         cy.get('label[for="date-picker"]').should('have.text', 'Select a Date ! ')
         cy.get('#title').type('Bala')
@@ -44,6 +41,4 @@ describe('End to end testing of Light-Dark Mode site', () => {
         })
         cy.get('#input-container > h1').should('have.text', 'Create Your Custom Countdown ! ')
     })
-
-
 })
